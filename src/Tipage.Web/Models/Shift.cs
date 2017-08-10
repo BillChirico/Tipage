@@ -10,6 +10,11 @@ namespace Tipage.Web.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// User of the shift.
+        /// </summary>
+        public ApplicationUser User { get; set; }
+
+        /// <summary>
         /// Start of the shift.
         /// </summary>
         public DateTimeOffset Start { get; set; }

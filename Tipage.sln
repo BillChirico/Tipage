@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tipage.Web", "Tipage.Web\Tipage.Web.csproj", "{D717E12C-936E-4D04-9EE6-398EFCA96236}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tipage.Web", "src\Tipage.Web\Tipage.Web.csproj", "{D717E12C-936E-4D04-9EE6-398EFCA96236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tipage.Domain", "src\Tipage.Domain\Tipage.Domain.csproj", "{86D24F1F-AC4C-4D10-9467-CA2235F4CFEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D717E12C-936E-4D04-9EE6-398EFCA96236}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D717E12C-936E-4D04-9EE6-398EFCA96236}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D717E12C-936E-4D04-9EE6-398EFCA96236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86D24F1F-AC4C-4D10-9467-CA2235F4CFEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86D24F1F-AC4C-4D10-9467-CA2235F4CFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86D24F1F-AC4C-4D10-9467-CA2235F4CFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86D24F1F-AC4C-4D10-9467-CA2235F4CFEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

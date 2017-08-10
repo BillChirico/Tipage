@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tipage.Web.Models
 {
@@ -27,11 +28,15 @@ namespace Tipage.Web.Models
         /// <summary>
         /// Total amount of cash tips.
         /// </summary>
+        [Display(Name = "Cash Tips")]
+        [DataType(DataType.Currency)]
         public decimal CashTips { get; set; }
 
         /// <summary>
         /// Total amount of credit card tips.
         /// </summary>
+        [Display(Name = "Credit Tips")]
+        [DataType(DataType.Currency)]
         public decimal CreditTips { get; set; }
     }
 }

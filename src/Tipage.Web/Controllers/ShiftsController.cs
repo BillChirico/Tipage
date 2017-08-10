@@ -1,22 +1,24 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Tipage.Web.Data;
 using Tipage.Web.Models;
 
 namespace Tipage.Web.Controllers
 {
+    [Authorize]
     public class ShiftsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ShiftsController(ApplicationDbContext context)
+        public ShiftsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, UserManager<ApplicationUser> userManager1)
         {
-            _context = context;    
+            _context = context;
+            _userManager = userManager1;
         }
 
         // GET: Shifts
@@ -29,16 +31,13 @@ namespace Tipage.Web.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var shift = await _context.Shifts
                 .SingleOrDefaultAsync(m => m.Id == id);
+
             if (shift == null)
-            {
                 return NotFound();
-            }
 
             return View(shift);
         }
@@ -58,10 +57,12 @@ namespace Tipage.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                shift.User = await _userManager.GetUserAsync(HttpContext.User);
                 _context.Add(shift);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
             return View(shift);
         }
 
@@ -69,15 +70,13 @@ namespace Tipage.Web.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var shift = await _context.Shifts.SingleOrDefaultAsync(m => m.Id == id);
+
             if (shift == null)
-            {
                 return NotFound();
-            }
+
             return View(shift);
         }
 
@@ -89,9 +88,7 @@ namespace Tipage.Web.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Id,Start,End,CashTips,CreditTips")] Shift shift)
         {
             if (id != shift.Id)
-            {
                 return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
@@ -100,19 +97,16 @@ namespace Tipage.Web.Controllers
                     _context.Update(shift);
                     await _context.SaveChangesAsync();
                 }
+
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!ShiftExists(shift.Id))
-                    {
                         return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
                 return RedirectToAction("Index");
             }
+
             return View(shift);
         }
 
@@ -120,28 +114,28 @@ namespace Tipage.Web.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var shift = await _context.Shifts
                 .SingleOrDefaultAsync(m => m.Id == id);
+
             if (shift == null)
-            {
                 return NotFound();
-            }
 
             return View(shift);
         }
 
         // POST: Shifts/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var shift = await _context.Shifts.SingleOrDefaultAsync(m => m.Id == id);
             _context.Shifts.Remove(shift);
+
             await _context.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
 

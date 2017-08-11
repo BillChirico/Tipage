@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>@Model.Start.Date.ToString("d")</h2>
+<h2>@Model.Start.ToString("d")</h2>
 
 <div>
     <hr />
@@ -19,7 +19,7 @@
             @Html.DisplayNameFor(model => model.End)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.End)
+            @Model.End.ToString("t")
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.CashTips)

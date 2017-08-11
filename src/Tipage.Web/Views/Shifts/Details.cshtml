@@ -4,17 +4,16 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Model.Start.Date.ToString("d")</h2>
 
 <div>
-    <h4>Shift</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Start)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Start)
+            @Model.Start.ToString("t")
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.End)

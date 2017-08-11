@@ -48,3 +48,8 @@ textarea {
         display: none;
     }
 }
+
+/* Shift */
+.total-tip {
+    color: green;
+}

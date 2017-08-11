@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tipage.Web.Data;
 using Tipage.Web.Models;
+using Tipage.Web.Models.ViewModels;
+using Tipage.Web.Services.Shift;
 
 namespace Tipage.Web.Controllers
 {
@@ -14,11 +16,13 @@ namespace Tipage.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IShiftService _shiftService;
 
-        public ShiftsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, UserManager<ApplicationUser> userManager1)
+        public ShiftsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IShiftService shiftService)
         {
             _context = context;
-            _userManager = userManager1;
+            _userManager = userManager;
+            _shiftService = shiftService;
         }
 
         // GET: Shifts
@@ -39,7 +43,15 @@ namespace Tipage.Web.Controllers
             if (shift == null)
                 return NotFound();
 
-            return View(shift);
+            var shiftViewModel = new ShiftViewModel
+            {
+                Shift = shift,
+                BusserTipout = _shiftService.GetTipout(shift),
+                RunnerTipout = _shiftService.GetTipout(shift),
+                HourlyWage = _shiftService.GetHourlyWage(shift)
+            };
+
+            return View(shiftViewModel);
         }
 
         // GET: Shifts/Create
@@ -58,8 +70,11 @@ namespace Tipage.Web.Controllers
             if (ModelState.IsValid)
             {
                 shift.User = await _userManager.GetUserAsync(HttpContext.User);
+
                 _context.Add(shift);
+
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
 

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Tipage.Web.Data;
 using Tipage.Web.Models;
 using Tipage.Web.Services;
+using Tipage.Web.Services.Shift;
 
 namespace Tipage.Web
 {
@@ -55,6 +56,8 @@ namespace Tipage.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddSingleton<IShiftService, ShiftService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

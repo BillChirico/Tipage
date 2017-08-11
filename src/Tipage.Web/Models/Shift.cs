@@ -42,8 +42,8 @@ namespace Tipage.Web.Models
         /// <summary>
         /// Cash tips and Credit tips.
         /// </summary>
+        [Display(Name = "Total Tips")]
+        [DataType(DataType.Currency)]
         public decimal TotalTips => CashTips + CreditTips;
-
-        public decimal BusserTipout => Math.Round((TotalTips * 10) / 100, 2, MidpointRounding.AwayFromZero);
     }
 }

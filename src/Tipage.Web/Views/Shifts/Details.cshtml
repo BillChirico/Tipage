@@ -1,41 +1,65 @@
-@model Tipage.Web.Models.Shift
+@model Tipage.Web.Models.ViewModels.ShiftViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>@Model.Start.ToString("d")</h2>
+<h2>@Model.Shift.Start.ToString("d")</h2>
 
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Start)
+            @Html.DisplayNameFor(model => model.Shift.Start)
         </dt>
         <dd>
-            @Model.Start.ToString("t")
+            @Model.Shift.Start.ToString("t")
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.End)
+            @Html.DisplayNameFor(model => model.Shift.End)
         </dt>
         <dd>
-            @Model.End.ToString("t")
+            @Model.Shift.End.ToString("t")
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CashTips)
+            @Html.DisplayNameFor(model => model.Shift.CashTips)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CashTips)
+            @Html.DisplayFor(model => model.Shift.CashTips)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CreditTips)
+            @Html.DisplayNameFor(model => model.Shift.CreditTips)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CreditTips)
+            @Html.DisplayFor(model => model.Shift.CreditTips)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Shift.TotalTips)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Shift.TotalTips)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HourlyWage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HourlyWage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusserTipout)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusserTipout)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RunnerTipout)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RunnerTipout)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Shift.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

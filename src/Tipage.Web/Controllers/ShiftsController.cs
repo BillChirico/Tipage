@@ -28,7 +28,9 @@ namespace Tipage.Web.Controllers
         // GET: Shifts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Shifts.ToListAsync());
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            return View(await _context.Shifts.Where(s => s.User == user).ToListAsync());
         }
 
         // GET: Shifts/Details/5

@@ -19,7 +19,16 @@ namespace Tipage.Web.Services.Shift
 
         public decimal GetHourlyWage(Models.Shift shift)
         {
-            return shift.TotalTips / (decimal)GetHoursWorked(shift);
+            var hours = GetHoursWorked(shift);
+
+            // Prevent division by zero.
+            if (hours > 0)
+            {
+                return shift.TotalTips / (decimal) GetHoursWorked(shift);
+            }
+
+            // Return the total tips if there was zero hours worked.
+            return shift.TotalTips;
         }
     }
 }

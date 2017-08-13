@@ -30,7 +30,7 @@ namespace Tipage.Web.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            return View(await _context.Shifts.Where(s => s.User == user).ToListAsync());
+            return View(await _context.Shifts.Where(s => s.User == user).OrderByDescending(s => s.Start.Date).ToListAsync());
         }
 
         // GET: Shifts/Details/5

@@ -26,7 +26,7 @@
     {
         <tr>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">@item.Start.ToString("d")</a>
+                <a asp-action="Details" asp-route-id="@item.Id">@item.Start.ToString("d") (@item.Start.DayOfWeek)</a>
             </td>
             <td>
                 @Html.DisplayFor(s => item.TotalTips)

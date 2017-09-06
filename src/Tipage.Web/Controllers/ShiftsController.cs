@@ -30,7 +30,14 @@ namespace Tipage.Web.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            return View(await _context.Shifts.Where(s => s.User == user).OrderByDescending(s => s.Start.Date).ToListAsync());
+            var shiftsViewModel = new ShiftListViewModel()
+            {
+                Shifts = await _context.Shifts.Where(s => s.User == user).OrderByDescending(s => s.Start.Date)
+                    .ToListAsync(),
+                TotalTips = _shiftService.GetAllTimeTips(user)
+            };
+
+            return View(shiftsViewModel);
         }
 
         // GET: Shifts/Details/5
@@ -77,7 +84,7 @@ namespace Tipage.Web.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", shift);
             }
 
             return View(shift);

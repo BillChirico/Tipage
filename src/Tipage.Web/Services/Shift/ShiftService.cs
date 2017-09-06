@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tipage.Web.Data;
+using Tipage.Web.Models;
 
 namespace Tipage.Web.Services.Shift
 {
     public class ShiftService : IShiftService
     {
+        private readonly ApplicationDbContext _context;
+
+        public ShiftService(ApplicationDbContext _context)
+        {
+            this._context = _context;
+        }
+        
         public decimal GetTipout(Models.Shift shift, int percentage = 10)
         {
             return Math.Round((shift.TotalTips * percentage) / 100, 2, MidpointRounding.AwayFromZero);
@@ -29,6 +38,11 @@ namespace Tipage.Web.Services.Shift
 
             // Return the total tips if there was zero hours worked.
             return shift.TotalTips;
+        }
+
+        public decimal GetAllTimeTips(ApplicationUser user)
+        {
+            return _context.Shifts.Where(s => s.User == user).Sum(s => s.TotalTips);
         }
     }
 }

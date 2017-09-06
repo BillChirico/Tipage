@@ -1,11 +1,12 @@
-@model IEnumerable<Tipage.Web.Models.Shift>
+@model Tipage.Web.Models.ViewModels.ShiftListViewModel
 
 @{
     ViewData["Title"] = "Shifts";
 }
 
 <h2>Shifts</h2>
-
+<h1 class="total-tip">@Html.DisplayFor(model => model.TotalTips)</h1>
+<hr/>
 <p>
     <a asp-action="Create">New Shift</a>
 </p>
@@ -21,7 +22,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Shifts)
     {
         <tr>
             <td>

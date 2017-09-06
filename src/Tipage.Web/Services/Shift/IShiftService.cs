@@ -1,4 +1,6 @@
-﻿namespace Tipage.Web.Services.Shift
+﻿using Tipage.Web.Models;
+
+namespace Tipage.Web.Services.Shift
 {
     public interface IShiftService
     {
@@ -7,5 +9,7 @@
         double GetHoursWorked(Models.Shift shift);
 
         decimal GetHourlyWage(Models.Shift shift);
+
+        decimal GetAllTimeTips(ApplicationUser user);
     }
 }

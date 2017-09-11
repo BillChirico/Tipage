@@ -1,4 +1,5 @@
-﻿using Tipage.Web.Models;
+﻿using System.Collections.Generic;
+using Tipage.Web.Models;
 
 namespace Tipage.Web.Services.Shift
 {
@@ -11,5 +12,7 @@ namespace Tipage.Web.Services.Shift
         decimal GetHourlyWage(Models.Shift shift);
 
         decimal GetAllTimeTips(ApplicationUser user);
+
+        decimal GetAverageHourlyWage(List<Models.Shift> shifts);
     }
 }

@@ -30,11 +30,14 @@ namespace Tipage.Web.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
+            var shifts = await _context.Shifts.Where(s => s.User == user).OrderByDescending(s => s.Start.Date)
+                .ToListAsync();
+
             var shiftsViewModel = new ShiftListViewModel()
             {
-                Shifts = await _context.Shifts.Where(s => s.User == user).OrderByDescending(s => s.Start.Date)
-                    .ToListAsync(),
-                TotalTips = _shiftService.GetAllTimeTips(user)
+                Shifts = shifts,
+                TotalTips = _shiftService.GetAllTimeTips(user),
+                AverageHourlyWage = _shiftService.GetAverageHourlyWage(shifts)
             };
 
             return View(shiftsViewModel);

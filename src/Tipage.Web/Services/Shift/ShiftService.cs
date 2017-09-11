@@ -44,5 +44,12 @@ namespace Tipage.Web.Services.Shift
         {
             return _context.Shifts.Where(s => s.User == user).Sum(s => s.TotalTips);
         }
+
+        public decimal GetAverageHourlyWage(List<Models.Shift> shifts)
+        {
+            var average = shifts.Sum(shift => GetHourlyWage(shift));
+
+            return average / shifts.Count;
+        }
     }
 }

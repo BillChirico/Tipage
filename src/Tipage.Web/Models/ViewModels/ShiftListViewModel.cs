@@ -10,7 +10,7 @@ namespace Tipage.Web.Models.ViewModels
         /// <summary>
         /// Total amount of tips made all time.
         /// </summary>
-        [Display(Name = "Total Tips")]
+        [Display(Name = "Total")]
         [DataType(DataType.Currency)]
         public decimal TotalTips { get; set; }
     }

@@ -33,14 +33,7 @@ namespace Tipage.Web.Controllers
             var shifts = await _context.Shifts.Where(s => s.User == user).OrderByDescending(s => s.Start.Date)
                 .ToListAsync();
 
-            var shiftsViewModel = new ShiftListViewModel()
-            {
-                Shifts = shifts,
-                TotalTips = _shiftService.GetAllTimeTips(user),
-                AverageHourlyWage = _shiftService.GetAverageHourlyWage(shifts)
-            };
-
-            return View(shiftsViewModel);
+            return View(shifts);
         }
 
         // GET: Shifts/Details/5
@@ -169,6 +162,21 @@ namespace Tipage.Web.Controllers
         private bool ShiftExists(int id)
         {
             return _context.Shifts.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Statistics()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var shifts = await _context.Shifts.Where(s => s.User == user).ToListAsync();
+
+            var statisticsViewModel = new StatisticsViewModel()
+            {
+                TotalTips = _shiftService.GetAllTimeTips(user),
+                AverageHourlyWage = _shiftService.GetAverageHourlyWage(shifts)
+            };
+
+            return View(statisticsViewModel);
         }
     }
 }

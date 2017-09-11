@@ -1,0 +1,10 @@
+﻿@model Tipage.Web.Models.ViewModels.StatisticsViewModel
+
+@{
+    ViewBag.Title = "Statistics";
+}
+
+<h2>Statistics</h2>
+
+<h3 class="total-tip">@Html.DisplayNameFor(model => model.TotalTips) @Html.DisplayFor(model => model.TotalTips)</h3>
+<h3 class="total-tip">@Html.DisplayNameFor(model => model.AverageHourlyWage) @Html.DisplayFor(model => model.AverageHourlyWage)</h3>

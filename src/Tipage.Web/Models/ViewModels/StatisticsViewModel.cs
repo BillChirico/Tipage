@@ -18,5 +18,12 @@ namespace Tipage.Web.Models.ViewModels
         [Display(Name = "Average Hourly Wage")]
         [DataType(DataType.Currency)]
         public decimal AverageHourlyWage { get; set; }
+        
+        /// <summary>
+        /// The average of all tips daily.
+        /// </summary>
+        [Display(Name = "Average Daily Tips")]
+        [DataType(DataType.Currency)]
+        public decimal AverageTips { get; set; }
     }
 }

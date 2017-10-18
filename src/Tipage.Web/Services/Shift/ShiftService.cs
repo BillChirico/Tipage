@@ -51,5 +51,12 @@ namespace Tipage.Web.Services.Shift
 
             return average / shifts.Count;
         }
+
+        public decimal GetAverageTips(List<Models.Shift> shifts)
+        {
+            var average = shifts.Sum(shift => shift.TotalTips);
+
+            return average / shifts.Count;
+        }
     }
 }

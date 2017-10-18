@@ -14,5 +14,7 @@ namespace Tipage.Web.Services.Shift
         decimal GetAllTimeTips(ApplicationUser user);
 
         decimal GetAverageHourlyWage(List<Models.Shift> shifts);
+
+        decimal GetAverageTips(List<Models.Shift> shifts);
     }
 }

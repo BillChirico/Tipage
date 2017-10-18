@@ -33,6 +33,8 @@ namespace Tipage.Web.Controllers
             var shifts = await _context.Shifts.Where(s => s.User == user).OrderByDescending(s => s.Start.Date)
                 .ToListAsync();
 
+            ViewData["AverageTips"] = _shiftService.GetAverageTips(shifts);
+
             return View(shifts);
         }
 
@@ -173,7 +175,8 @@ namespace Tipage.Web.Controllers
             var statisticsViewModel = new StatisticsViewModel()
             {
                 TotalTips = _shiftService.GetAllTimeTips(user),
-                AverageHourlyWage = _shiftService.GetAverageHourlyWage(shifts)
+                AverageHourlyWage = _shiftService.GetAverageHourlyWage(shifts),
+                AverageTips = _shiftService.GetAverageTips(shifts)
             };
 
             return View(statisticsViewModel);

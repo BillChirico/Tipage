@@ -15,7 +15,7 @@
             Date
         </th>
         <th>
-            Tips    
+            Tips
         </th>
     </tr>
     </thead>
@@ -26,9 +26,19 @@
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">@item.Start.ToString("d") (@item.Start.DayOfWeek)</a>
             </td>
-            <td>
-                @Html.DisplayFor(s => item.TotalTips)
-            </td>
+            @if (item.TotalTips >= (decimal) ViewData["AverageTips"])
+            {
+                <td class="total-tip">
+                    @Html.DisplayFor(s => item.TotalTips)
+                </td>
+            }
+
+            else
+            {
+                <td>
+                    @Html.DisplayFor(s => item.TotalTips)
+                </td>
+            }
         </tr>
     }
     </tbody>
